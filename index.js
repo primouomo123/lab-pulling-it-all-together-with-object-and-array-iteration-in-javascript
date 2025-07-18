@@ -114,3 +114,117 @@ function gameObject() {
         },
     };
 }
+
+//I call the gameObject function to store the object in a variable called gameObj
+const gameObj = gameObject();
+
+//I create objects for each team's players with their properties
+const homePlayers = gameObj.home.players;
+const awayPlayers = gameObj.away.players;
+
+/*Here I create an object called allPlayers and I store all players names objects from both teams,
+so later I can work with that more easily*/
+const allPlayers = Object.assign({}, gameObj.home.players, gameObj.away.players);
+
+/*I create an array with the all the players names, so I can have dynamic access to the allPlayers object
+when creating the required functions*/
+const playersNames = Object.keys(allPlayers);
+
+/*Here I use the objects and array related to the players that I created to have an easier access to the properties of the object
+inside gameObject function*/
+function numPointsScored(playerName) {
+    if (!playersNames.includes(playerName)) {
+        return "Error: You've entered an incorrect player name. Please try again";
+    }
+
+    return allPlayers[playerName].points;
+}
+
+/*Here I also use the objects and array related to the players that I created to have an easier access to the properties of the object
+inside gameObject function*/
+function shoeSize(playerName) {
+    if (!playersNames.includes(playerName)) {
+        return "Error: You've entered an incorrect player name. Please try again";
+    }
+
+    return allPlayers[playerName].shoe;
+}
+
+function teamColors(teamName) {
+    if (teamName !== gameObj.home.teamName && teamName !== gameObj.away.teamName) {
+        return "Error: You've entered an incorrect team name. Please try again";
+    }
+
+    if (teamName === gameObj.home.teamName) {
+        return gameObj.home.colors;
+    }    
+    else {
+        return gameObj.away.colors;
+    }
+}
+
+function teamNames() {
+    const teams = [gameObj.home.teamName, gameObj.away.teamName];
+    return teams;
+}
+
+function playerNumbers(teamName) {
+    if (teamName !== gameObj.home.teamName && teamName !== gameObj.away.teamName) {
+        return "Error: You've entered an incorrect team name. Please try again";
+    }
+
+    const jerseyNumbers = [];
+
+    if (teamName === gameObj.home.teamName) {
+        for (let player in homePlayers) {
+            jerseyNumbers.push(homePlayers[player].number);
+        }
+    }    
+    else {
+        for (let player in awayPlayers) {
+            jerseyNumbers.push(awayPlayers[player].number);
+        }
+    }
+
+    return jerseyNumbers;
+}
+
+function playerStats(playerName) {
+     if (!playersNames.includes(playerName)) {
+        return ("Error: You've entered an incorrect player name. Please try again");
+    }
+
+    return allPlayers[playerName];
+}
+
+function bigShoeRebounds() {
+    const shoeSizes = Object.values(allPlayers).map(player => {
+        return player.shoe;
+    });
+
+    const biggestShoe = shoeSizes.reduce((max, b) => {
+        if (b > max) {
+            max = b;
+        }
+
+        return max;
+    });
+
+    let reboundsOfBiggestShoe;
+
+    for (let player in allPlayers) {
+        if (allPlayers[player].shoe === biggestShoe) {
+            reboundsOfBiggestShoe = allPlayers[player].rebounds;
+        }
+    }
+
+    return reboundsOfBiggestShoe;
+}
+
+numPointsScored("Alan Anderson");
+shoeSize("Brendan Hayword");
+teamColors("Brooklyn Nets");
+teamNames();
+playerNumbers("Charlotte Hornets");
+playerStats("Jeff Adrien");
+bigShoeRebounds();
