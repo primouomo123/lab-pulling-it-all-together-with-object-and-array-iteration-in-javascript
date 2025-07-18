@@ -5,6 +5,11 @@ describe('Basketball Stats', function () {
       expect(numPointsScored('Alan Anderson')).to.equal(22);
       expect(numPointsScored('Ben Gordon')).to.equal(33);
     });
+    it('should return an error message if wrong player name or empty string', function () {
+      expect(numPointsScored('wrong player name')).to.equal("Error: You've entered an incorrect player name. Please try again");
+      expect(numPointsScored('')).to.equal("Error: You've entered an incorrect player name. Please try again");
+      expect(numPointsScored()).to.equal("Error: You've entered an incorrect player name. Please try again");
+    });
   });
 
   describe('shoeSize', function () {
@@ -12,12 +17,22 @@ describe('Basketball Stats', function () {
       expect(shoeSize('Alan Anderson')).to.equal(16);
       expect(shoeSize('Ben Gordon')).to.equal(15);
     });
+    it('should return an error message if wrong player name or empty string', function () {
+      expect(numPointsScored('wrong player name')).to.equal("Error: You've entered an incorrect player name. Please try again");
+      expect(numPointsScored('')).to.equal("Error: You've entered an incorrect player name. Please try again");
+      expect(numPointsScored()).to.equal("Error: You've entered an incorrect player name. Please try again");
+    });
   });
   
   describe('teamColors', function () {
     it('should return team colors', function () {
       expect(teamColors('Brooklyn Nets')).to.deep.equal(['Black', 'White']);
       expect(teamColors('Charlotte Hornets')).to.deep.equal(['Turquoise', 'Purple']);
+    });
+    it('should return an error message if wrong team name or empty string', function () {
+      expect(teamColors('wrong team name')).to.deep.equal("Error: You've entered an incorrect team name. Please try again");
+      expect(teamColors('')).to.deep.equal("Error: You've entered an incorrect team name. Please try again");
+      expect(teamColors()).to.deep.equal("Error: You've entered an incorrect team name. Please try again");
     });
   });
   
@@ -31,6 +46,11 @@ describe('Basketball Stats', function () {
     it('should return player numbers of a team', function () {
       expect(playerNumbers('Brooklyn Nets')).to.deep.equal([0, 30, 11, 1, 31]);
       expect(playerNumbers('Charlotte Hornets')).to.deep.equal([4, 0, 2, 8, 33]);
+    });
+    it('should return an error message if wrong team name or empty string', function () {
+      expect(playerNumbers('wrong team name')).to.deep.equal("Error: You've entered an incorrect team name. Please try again");
+      expect(playerNumbers('')).to.deep.equal("Error: You've entered an incorrect team name. Please try again");
+      expect(playerNumbers()).to.deep.equal("Error: You've entered an incorrect team name. Please try again");
     });
   });
 
@@ -57,6 +77,11 @@ describe('Basketball Stats', function () {
         blocks: 1,
         slamDunks: 0
       });
+    });
+    it('should return an error message if wrong player name or empty string', function () {
+      expect(playerStats('wrong player name')).to.deep.equal("Error: You've entered an incorrect player name. Please try again");
+      expect(playerStats('')).to.deep.equal("Error: You've entered an incorrect player name. Please try again");
+      expect(playerStats()).to.deep.equal("Error: You've entered an incorrect player name. Please try again");
     });
   });
 
