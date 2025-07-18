@@ -210,15 +210,21 @@ function bigShoeRebounds() {
         return max;
     });
 
-    let reboundsOfBiggestShoe;
+    let reboundsOfBiggestShoe = [];
 
     for (let player in allPlayers) {
         if (allPlayers[player].shoe === biggestShoe) {
-            reboundsOfBiggestShoe = allPlayers[player].rebounds;
+            reboundsOfBiggestShoe.push({
+                name: player,
+                rebounds: allPlayers[player].rebounds});
         }
     }
 
-    return reboundsOfBiggestShoe;
+    if (reboundsOfBiggestShoe.length > 1) {
+        return reboundsOfBiggestShoe;
+    }
+
+    return reboundsOfBiggestShoe[0].rebounds;
 }
 
 numPointsScored("Alan Anderson");
