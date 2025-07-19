@@ -202,9 +202,9 @@ function bigShoeRebounds() {
         return player.shoe;
     });
 
-    const biggestShoe = shoeSizes.reduce((max, b) => {
-        if (b > max) {
-            max = b;
+    const biggestShoe = shoeSizes.reduce((max, size) => {
+        if (size > max) {
+            max = size;
         }
 
         return max;
@@ -227,6 +227,70 @@ function bigShoeRebounds() {
     return reboundsOfBiggestShoe[0].rebounds;
 }
 
+function mostPointsScored() {
+    const pointsScored = Object.values(allPlayers).map(player => {
+        return player.points;
+    });
+
+    const mostPoints = pointsScored.reduce((max, points) => {
+        if (points > max) {
+            max = points;
+        }
+
+        return max;
+    });
+
+    let playersWithMostPoints = [];
+
+    for (let player in allPlayers) {
+        if (allPlayers[player].points === mostPoints) {
+            playersWithMostPoints.push(player);
+        }
+    }
+    
+    return playersWithMostPoints;
+}
+
+function winningTeam() {
+    const homeTotalPoints = Object.values(homePlayers).reduce((total, player) => {
+        return total += player.points;
+    }, 0);
+
+    const awayTotalPoints = Object.values(awayPlayers).reduce((total, player) => {
+        return total += player.points;
+    }, 0);
+
+    if (homeTotalPoints === awayTotalPoints) {
+        return "Tie";
+    }
+    else if (homeTotalPoints > awayTotalPoints) {
+        return gameObj.home.teamName;
+    }
+    else {
+        return gameObj.away.teamName;
+    }
+}
+
+function playerWithLongestName() {
+    const longestNameLength = playersNames.reduce((longest, player) => {
+        if (player.length > longest) {
+            return longest = player.length;
+        }
+        
+        return longest;
+    }, 0);
+
+    const longestName = [];
+    
+    for (let player of playersNames) {
+        if (player.length === longestNameLength) {
+            longestName.push(player);
+        }
+    }
+
+    return longestName;
+}
+
 numPointsScored("Alan Anderson");
 shoeSize("Brendan Hayword");
 teamColors("Brooklyn Nets");
@@ -234,3 +298,6 @@ teamNames();
 playerNumbers("Charlotte Hornets");
 playerStats("Jeff Adrien");
 bigShoeRebounds();
+mostPointsScored();
+winningTeam();
+playerWithLongestName();

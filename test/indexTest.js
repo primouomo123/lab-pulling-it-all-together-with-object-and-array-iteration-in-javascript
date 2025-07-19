@@ -90,4 +90,22 @@ describe('Basketball Stats', function () {
       expect(bigShoeRebounds()).to.equal(12);
     });
   });
+
+  describe('mostPointsScored', function () {
+    it('should return the name(s) of the player(s) with the most points', function () {
+      expect(mostPointsScored()).to.deep.equal(['Ben Gordon']);
+    });
+  });
+
+  describe('winningTeam', function () {
+    it('should return the winning team or tie, if equal points', function () {
+      expect(winningTeam()).to.deep.equal('Brooklyn Nets');
+    });
+  });
+
+  describe('playerWithLongestName', function () {
+    it('should return the player(s) with the longest name(s)', function () {
+      expect(playerWithLongestName()).to.deep.equal(['Bismack Biyombo', 'Brendan Hayword']);
+    });
+  });
 });
