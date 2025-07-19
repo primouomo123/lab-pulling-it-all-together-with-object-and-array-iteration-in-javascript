@@ -291,6 +291,38 @@ function playerWithLongestName() {
     return longestName;
 }
 
+function doesLongNameStealATon() {
+    const steals = [];
+    
+    Object.values(allPlayers).map(player => {
+        steals.push(player.steals);
+        return steals;
+    });
+
+    const mostSteals = steals.reduce((total, steal) => {
+        if (steal > total) {
+            total = steal;
+        }
+
+        return total;
+    });
+
+    const longestNames = playerWithLongestName();
+
+    const answer = [];
+
+    for (let player of longestNames) {
+        if (allPlayers[player].steals === mostSteals) {
+            answer.push({[player]: allPlayers[player].steals === mostSteals});
+        }
+        else {
+            answer.push({[player]: allPlayers[player].steals === mostSteals});
+        }
+    }
+
+    return answer;
+}
+
 numPointsScored("Alan Anderson");
 shoeSize("Brendan Hayword");
 teamColors("Brooklyn Nets");
@@ -301,3 +333,4 @@ bigShoeRebounds();
 mostPointsScored();
 winningTeam();
 playerWithLongestName();
+doesLongNameStealATon();
