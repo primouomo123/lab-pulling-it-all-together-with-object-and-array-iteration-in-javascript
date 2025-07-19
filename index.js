@@ -134,7 +134,7 @@ const playersNames = Object.keys(allPlayers);
 inside gameObject function*/
 function numPointsScored(playerName) {
     if (!playersNames.includes(playerName)) {
-        return "Error: You've entered an incorrect player name. Please try again";
+        return "Error: You've entered an incorrect player name. Please try again"; //Managing edge cases
     }
 
     return allPlayers[playerName].points;
@@ -144,7 +144,7 @@ function numPointsScored(playerName) {
 inside gameObject function*/
 function shoeSize(playerName) {
     if (!playersNames.includes(playerName)) {
-        return "Error: You've entered an incorrect player name. Please try again";
+        return "Error: You've entered an incorrect player name. Please try again"; //Managing edge cases
     }
 
     return allPlayers[playerName].shoe;
@@ -152,14 +152,14 @@ function shoeSize(playerName) {
 
 function teamColors(teamName) {
     if (teamName !== gameObj.home.teamName && teamName !== gameObj.away.teamName) {
-        return "Error: You've entered an incorrect team name. Please try again";
+        return "Error: You've entered an incorrect team name. Please try again"; //Managing edge cases
     }
 
     if (teamName === gameObj.home.teamName) {
-        return gameObj.home.colors;
+        return gameObj.home.colors; //In case the team is "Brooklyn Nets"
     }    
     else {
-        return gameObj.away.colors;
+        return gameObj.away.colors; //In case the tam is "Charlotte Hornets"
     }
 }
 
@@ -170,19 +170,19 @@ function teamNames() {
 
 function playerNumbers(teamName) {
     if (teamName !== gameObj.home.teamName && teamName !== gameObj.away.teamName) {
-        return "Error: You've entered an incorrect team name. Please try again";
+        return "Error: You've entered an incorrect team name. Please try again"; //Managing edge cases
     }
 
     const jerseyNumbers = [];
 
     if (teamName === gameObj.home.teamName) {
         for (let player in homePlayers) {
-            jerseyNumbers.push(homePlayers[player].number);
+            jerseyNumbers.push(homePlayers[player].number); //In case the team is "Brooklyn Nets"
         }
     }    
     else {
         for (let player in awayPlayers) {
-            jerseyNumbers.push(awayPlayers[player].number);
+            jerseyNumbers.push(awayPlayers[player].number); //In case the team is "Charlotte Hornets"
         }
     }
 
@@ -191,18 +191,18 @@ function playerNumbers(teamName) {
 
 function playerStats(playerName) {
      if (!playersNames.includes(playerName)) {
-        return ("Error: You've entered an incorrect player name. Please try again");
+        return ("Error: You've entered an incorrect player name. Please try again"); //Managing edge cases
     }
 
     return allPlayers[playerName];
 }
 
 function bigShoeRebounds() {
-    const shoeSizes = Object.values(allPlayers).map(player => {
+    const shoeSizes = Object.values(allPlayers).map(player => { //Here I store all players' shoe sizes
         return player.shoe;
     });
 
-    const biggestShoe = shoeSizes.reduce((max, size) => {
+    const biggestShoe = shoeSizes.reduce((max, size) => { //Here I get the biggest shoe size
         if (size > max) {
             max = size;
         }
@@ -214,25 +214,27 @@ function bigShoeRebounds() {
 
     for (let player in allPlayers) {
         if (allPlayers[player].shoe === biggestShoe) {
-            reboundsOfBiggestShoe.push({
+            reboundsOfBiggestShoe.push({ //I store all the players with the biggest shoe size with their corresponding rebounds
                 name: player,
                 rebounds: allPlayers[player].rebounds});
         }
     }
 
     if (reboundsOfBiggestShoe.length > 1) {
-        return reboundsOfBiggestShoe;
+        return reboundsOfBiggestShoe; /*If there's more thann 1 player with the biggest shoe it returns an array of objects that
+        specifies those players with their corresponding rebounds*/
     }
 
-    return reboundsOfBiggestShoe[0].rebounds;
+    return reboundsOfBiggestShoe[0].rebounds; /*I just return the rebounds of the player with the biggest shoe,
+    as originally requested*/
 }
 
 function mostPointsScored() {
-    const pointsScored = Object.values(allPlayers).map(player => {
+    const pointsScored = Object.values(allPlayers).map(player => { //Storing the points scored by each player
         return player.points;
     });
 
-    const mostPoints = pointsScored.reduce((max, points) => {
+    const mostPoints = pointsScored.reduce((max, points) => { //Getting the maximum points scored by a player
         if (points > max) {
             max = points;
         }
@@ -244,35 +246,36 @@ function mostPointsScored() {
 
     for (let player in allPlayers) {
         if (allPlayers[player].points === mostPoints) {
-            playersWithMostPoints.push(player);
+            playersWithMostPoints.push(player); //Storing the player(s) with the maximum points scored 
         }
     }
     
-    return playersWithMostPoints;
+    return playersWithMostPoints; //I decided to return an array in case there's more than 1 player with the maximum points scored
 }
 
 function winningTeam() {
-    const homeTotalPoints = Object.values(homePlayers).reduce((total, player) => {
+    const homeTotalPoints = Object.values(homePlayers).reduce((total, player) => { //Adding total points of home team ("Brooklyn Nets")
         return total += player.points;
     }, 0);
 
-    const awayTotalPoints = Object.values(awayPlayers).reduce((total, player) => {
+    const awayTotalPoints = Object.values(awayPlayers).reduce((total, player) => { /*Adding the total points of the away team
+        ("Charlotte Hornets")*/
         return total += player.points;
     }, 0);
 
     if (homeTotalPoints === awayTotalPoints) {
-        return "Tie";
+        return "Tie"; //In case it's a tie.
     }
     else if (homeTotalPoints > awayTotalPoints) {
-        return gameObj.home.teamName;
+        return gameObj.home.teamName; //In case "Brooklyn Nets" wins
     }
     else {
-        return gameObj.away.teamName;
+        return gameObj.away.teamName; ////In case "Charlotte Hornets" wins
     }
 }
 
 function playerWithLongestName() {
-    const longestNameLength = playersNames.reduce((longest, player) => {
+    const longestNameLength = playersNames.reduce((longest, player) => { //I get the length of the longest name(s)
         if (player.length > longest) {
             return longest = player.length;
         }
@@ -288,18 +291,18 @@ function playerWithLongestName() {
         }
     }
 
-    return longestName;
+    return longestName; //I return an array with the player(s) with the longest name(s)
 }
 
 function doesLongNameStealATon() {
     const steals = [];
     
     Object.values(allPlayers).map(player => {
-        steals.push(player.steals);
+        steals.push(player.steals); //I get each payer's steals
         return steals;
     });
 
-    const mostSteals = steals.reduce((total, steal) => {
+    const mostSteals = steals.reduce((total, steal) => { //I get the maximum steals
         if (steal > total) {
             total = steal;
         }
@@ -307,17 +310,16 @@ function doesLongNameStealATon() {
         return total;
     });
 
-    const longestNames = playerWithLongestName();
+    const longestNames = playerWithLongestName(); /*I call playerWithLongestName function to get the player(s) with the longest
+    name(), so I can compare if their steals is equal to the maximum steals or not*/
 
-    const answer = [];
+    let answer;
 
     for (let player of longestNames) {
         if (allPlayers[player].steals === mostSteals) {
-            answer.push({[player]: allPlayers[player].steals === mostSteals});
-        }
-        else {
-            answer.push({[player]: allPlayers[player].steals === mostSteals});
-        }
+            answer = (allPlayers[player].steals === mostSteals); /*Here I  store the boolean value of true (if one of the players
+            with the longest name also has the most steals)  or false (if it is not the case)*/
+        }        
     }
 
     return answer;

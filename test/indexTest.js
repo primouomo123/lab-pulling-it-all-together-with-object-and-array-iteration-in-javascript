@@ -111,7 +111,7 @@ describe('Basketball Stats', function () {
 
   describe('doesLongNameStealATon', function () {
     it("should return if it's true that the player(s) with longest name(s) has the most steals", function () {
-      expect(doesLongNameStealATon()).to.deep.equal([{'Bismack Biyombo': false}, {'Brendan Hayword': true}]);
+      expect(doesLongNameStealATon()).to.deep.equal(true);
     });
   });
 });
